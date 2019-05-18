@@ -5,12 +5,15 @@
 #include <iostream>
 using namespace std;
 
+
+
 class String
 {
 private:
 	char* ptrStr;
 	int length;
 	char* getLine(istream&);
+	static const size_t CINLIM = 10;
 public:
 	String();
 	String(const char*);

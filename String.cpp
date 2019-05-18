@@ -6,10 +6,10 @@
 
 char * String::getLine(istream& input)
 {
-	const size_t sizeIncrement = 10;
-	char* buffer = new char[sizeIncrement];
+	String::CINLIM;
+	char* buffer = new char[CINLIM];
 	char* currentPosition = buffer;
-	size_t maximumLength = sizeIncrement;
+	size_t maximumLength = CINLIM;
 	size_t length = 0;
 	int character;
 
@@ -20,10 +20,10 @@ char * String::getLine(istream& input)
 			break;
 		if (++length >= maximumLength)
 		{
-			char* newBuffer = new char[maximumLength += sizeIncrement];
+			char* newBuffer = new char[maximumLength += CINLIM];
+			strcpy(newBuffer, buffer);
 			currentPosition = newBuffer + (currentPosition - buffer);
 			buffer = newBuffer;
-
 		}
 		*currentPosition++ = character;
 	}
@@ -98,9 +98,7 @@ ostream & operator<<(ostream &output, const String &s)
 //---------------------------------------------------------
 istream & operator >> (istream &input, String &s)
 {
-	//input >> s;
 	s = s.getLine(input);
-
 	return input;
 
 }

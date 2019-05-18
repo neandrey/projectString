@@ -10,9 +10,7 @@ int main() {
 	cin >> s1;
 	String s2(s1);
 	String s3;
-	cout << "enter data: ";
-	cin >> s3;
-	//s1 = s3;
+	s3 = s1;
 	s1 = s1;
 
 	String s4 = s1 + s3;
@@ -24,7 +22,7 @@ int main() {
 
 
 
-	//list<String> s;
+	list<String> s;
 
 	
 	getchar();
