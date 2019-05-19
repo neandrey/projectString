@@ -1,11 +1,8 @@
-
 #ifndef STRING_H
 #define STRING_H
 
 #include <iostream>
 using namespace std;
-
-
 
 class String
 {
@@ -24,8 +21,10 @@ public:
 	void display() const;
 	friend String operator+ (String&, String&);
 	friend ostream &operator<< (ostream&, const String&);
-	friend istream &operator >> (istream&, String&);
+	friend istream &operator>> (istream&, String&);
 	friend bool operator< (const String&, const String&);
+	friend bool operator> (const String&, const String&);
+
 };
 
 #endif // !STRING

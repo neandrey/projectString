@@ -6,7 +6,6 @@
 #include <limits>
 #include "String.h"
 
-
 char * String::getLine(istream& input)
 {
 	String::CINLIM;
@@ -36,38 +35,6 @@ char * String::getLine(istream& input)
 	
 	return buffer;
 }
-//---------------------------------------------
-//char * String::getLine(istream& input)
-//{
-//	String::CINLIM;
-//	char* buffer = new char[CINLIM];
-//	char* currentPosition = buffer;
-//	size_t maximumLength = CINLIM;
-//	size_t length = 0;
-//	char character;
-//
-//	istreambuf_iterator<char> inpos(input);
-//	istreambuf_iterator<char> endpos;
-//
-//	while (*inpos != '\n') {
-//
-//		if (++length >= maximumLength)
-//		{
-//			char* newBuffer = new char[maximumLength += CINLIM];
-//			strcpy(newBuffer, buffer);
-//			currentPosition = newBuffer + (currentPosition - buffer);
-//			buffer = newBuffer;
-//		}
-//		*currentPosition++ = *inpos;
-//		++inpos;
-//	}
-//	input.ignore(numeric_limits<streamsize>::max(), '\n');
-//	*currentPosition = '\0';
-//	
-//	return buffer;
-//	
-//
-//}
 //----------------------------------------------
 String::String() : length(0) {
 	ptrStr = new char[length + 1];
@@ -135,19 +102,32 @@ ostream & operator<<(ostream &output, const String &s)
 //---------------------------------------------------------
 istream & operator >> (istream &input, String &s)
 {
-
-	//input.ignore();
-	s = s.getLine(input);
+	//данное решение не помогло.
 	//input.clear();
 	//input.ignore(numeric_limits<streamsize>::max(), '\n');
+	//поэтому пока просто экранирую первый символ.
+	//думаю надо смотреть потоковые буфера.
+	//короче здесь € не знаю.
 	
-	
+	input.ignore();
+	s = s.getLine(input);
 	return input;
-
 }
-bool operator<(const String & s1, const String & s2)
+bool operator>(const String & s1, const String & s2)
 {
-	return (s1.ptrStr < s2.ptrStr) ? true : false;
-
+	int h = strcmp(s1.ptrStr, s2.ptrStr);
+	if (h > 0)
+		return true;
+	if (h < 0)
+		return false;
+}
+//------------------------------------------------------
+bool operator<(const String & s1, const String &s2)
+{
+	int h = strcmp(s1.ptrStr, s2.ptrStr);
+	if (h < 0)
+		return true;
+	if (h > 0)
+		return false;
 }
 //------------------------------------------------------------
