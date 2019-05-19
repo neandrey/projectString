@@ -25,7 +25,7 @@ public:
 	friend String operator+ (String&, String&);
 	friend ostream &operator<< (ostream&, const String&);
 	friend istream &operator >> (istream&, String&);
-
+	friend bool operator< (const String&, const String&);
 };
 
 #endif // !STRING

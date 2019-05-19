@@ -1,6 +1,9 @@
 //#include <iostream>
 //using namespace std;
 #include <iomanip>
+#include <iterator>
+#include <cstring>
+#include <limits>
 #include "String.h"
 
 
@@ -16,8 +19,10 @@ char * String::getLine(istream& input)
 	while (1)
 	{
 		character = input.get();
-		if (character == '\n')
+		if (character == '\n') {
 			break;
+		}
+			
 		if (++length >= maximumLength)
 		{
 			char* newBuffer = new char[maximumLength += CINLIM];
@@ -28,9 +33,41 @@ char * String::getLine(istream& input)
 		*currentPosition++ = character;
 	}
 	*currentPosition = '\0';
-
+	
 	return buffer;
 }
+//---------------------------------------------
+//char * String::getLine(istream& input)
+//{
+//	String::CINLIM;
+//	char* buffer = new char[CINLIM];
+//	char* currentPosition = buffer;
+//	size_t maximumLength = CINLIM;
+//	size_t length = 0;
+//	char character;
+//
+//	istreambuf_iterator<char> inpos(input);
+//	istreambuf_iterator<char> endpos;
+//
+//	while (*inpos != '\n') {
+//
+//		if (++length >= maximumLength)
+//		{
+//			char* newBuffer = new char[maximumLength += CINLIM];
+//			strcpy(newBuffer, buffer);
+//			currentPosition = newBuffer + (currentPosition - buffer);
+//			buffer = newBuffer;
+//		}
+//		*currentPosition++ = *inpos;
+//		++inpos;
+//	}
+//	input.ignore(numeric_limits<streamsize>::max(), '\n');
+//	*currentPosition = '\0';
+//	
+//	return buffer;
+//	
+//
+//}
 //----------------------------------------------
 String::String() : length(0) {
 	ptrStr = new char[length + 1];
@@ -45,20 +82,20 @@ String::String(const char* s) {
 //---------------------------------------------
 String::String(const String& copy)
 {
-	cout << "constructor_copy_work" << endl;
+	//cout << "constructor_copy_work" << endl;
 	length = copy.length;
 	ptrStr = new char[strlen(copy.ptrStr) + 1];
 	strcpy(ptrStr, copy.ptrStr);
 }
 //--------------------------------------------------
 String::~String() {
-	cout << "Destructor_work" << ptrStr << endl;
+	//cout << "Destructor_work" << ptrStr << endl;
 	delete[] ptrStr;
  }
 //-------------------------------------------------
 String & String::operator=(const String & str)
 {
-	cout << "operator = " << endl;
+	//cout << "operator = " << endl;
 	if (&str == this)
 		return *this;
 	delete[] ptrStr;
@@ -98,7 +135,19 @@ ostream & operator<<(ostream &output, const String &s)
 //---------------------------------------------------------
 istream & operator >> (istream &input, String &s)
 {
+
+	//input.ignore();
 	s = s.getLine(input);
+	//input.clear();
+	//input.ignore(numeric_limits<streamsize>::max(), '\n');
+	
+	
 	return input;
 
 }
+bool operator<(const String & s1, const String & s2)
+{
+	return (s1.ptrStr < s2.ptrStr) ? true : false;
+
+}
+//------------------------------------------------------------
