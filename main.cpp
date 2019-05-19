@@ -73,9 +73,11 @@ int main() {
 		cout << (*iter1++) << endl;
 	}
 
-	
+	cout << endl;
+
 	getchar();
 	getchar();
+	//end;
 	return 0;
 }
 //----------------------------------------
